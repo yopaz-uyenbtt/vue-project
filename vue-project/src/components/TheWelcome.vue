@@ -5,6 +5,7 @@ import ToolingIcon from './icons/IconTooling.vue'
 import EcosystemIcon from './icons/IconEcosystem.vue'
 import CommunityIcon from './icons/IconCommunity.vue'
 import SupportIcon from './icons/IconSupport.vue'
+import { RouterLink } from 'vue-router'
 </script>
 
 <template>
@@ -54,7 +55,7 @@ import SupportIcon from './icons/IconSupport.vue'
     <a href="https://github.com/vuejs/devtools" target="_blank" rel="noopener">Vue Dev Tools</a>. If
     you need more resources, we suggest paying
     <a href="https://github.com/vuejs/awesome-vue" target="_blank" rel="noopener">Awesome Vue</a>
-    a visit.
+    a visit. Now visit the <RouterLink to="/about">Aboout Page</RouterLink>
   </WelcomeItem>
 
   <WelcomeItem>
