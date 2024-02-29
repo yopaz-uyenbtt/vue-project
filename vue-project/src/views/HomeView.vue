@@ -1,37 +1,28 @@
 <script setup>
-import TheWelcome from '../components/TheWelcome.vue';
-import { ref } from 'vue';
+import { ref, watch } from "vue";
 
-let message = ref("Hello, World!")
+import {useStorage} from "@/composables/useStorage"
+
+let food = useStorage('food', 'tacos');
+let age = useStorage('age', 10);
+
+let obj = useStorage('obj', { one: 'one '});
 
 setTimeout(() => {
-  message.value = "I Have Been Changed";
-}, 2000);
-
-let doSomething = () => {
-  alert("Doing it now");
-}
-  // data() { 
-  //   return {
-  //     message: "Hello World",
-  //   };
-
-  // },
-
-  // mounted() {
-  //   alert("I have been mounted")
-  // },
-
+  obj.value = {'changed' : 'entirely'};
+}, 3000)
 </script>
 
 <template>
   <main>
-    <TheWelcome />
-
-    <p>{{ message }}</p>
+    <p>
+      What is your favorite food? <input type="text" v-model="food">
+    </p>
 
     <p>
-      <button @click="doSomething">Click me</button>
+      How old are yoou? <input type="text" v-model="age">
     </p>
-  </main>
+
+</main>
 </template>
+
