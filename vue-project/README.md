@@ -1,35 +1,59 @@
-# vue-project
+## Có 2 cách chính để tương tác với Vue
+#### 1. Options API (Vue2)
+Xác định logic của các thành phần trong component bằng cách sử dụng data, methods, mounted...
 
-This template should help get you started developing with Vue 3 in Vite.
+```javascript
+<script>
+export default {
+  // reactive state
+  data() {
+    return {
+      count: 0
+    }
+  },
 
-## Recommended IDE Setup
+  // functions that mutate state and trigger updates
+  methods: {
+    increment() {
+      this.count++
+    }
+  },
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+  // lifecycle hooks
+  mounted() {
+    console.log(`The initial count is ${this.count}.`)
+  }
+}
+</script>
 
-## Customize configuration
-
-See [Vite Configuration Reference](https://vitejs.dev/config/).
-
-## Project Setup
-
-```sh
-npm install
+<template>
+  <button @click="increment">Count is: {{ count }}</button>
+</template> 
 ```
 
-### Compile and Hot-Reload for Development
+#### 2. Composition API (từ Vue 3)
+Xác định logic của các thành phần trong component bằng cách sử dụng import API function, thường sử dụng với thẻ *\<script setup\>*
 
-```sh
-npm run dev
-```
+```javascript
+<script setup>
+import { ref, onMounted } from 'vue'
 
-### Compile and Minify for Production
+// reactive state
+const count = ref(0)
 
-```sh
-npm run build
-```
+// functions that mutate state and trigger updates
+function increment() {
+  count.value++
+}
 
-### Lint with [ESLint](https://eslint.org/)
+// lifecycle hooks
+onMounted(() => {
+  console.log(`The initial count is ${count.value}.`)
+})
+</script>
 
-```sh
-npm run lint
-```
+<template>
+  <button @click="increment">Count is: {{ count }}</button>
+</template>
+
+
