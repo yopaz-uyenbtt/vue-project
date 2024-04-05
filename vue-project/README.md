@@ -1,10 +1,14 @@
 I. [Có 2 cách để tương tác với Vue](#có-2-cách-chính-để-tương-tác-với-vue)
+
 II. [v-for](#list-rendering)
   1. [Cú pháp](#1-cú-pháp)
   2. [v-for with an Object](#2-v-for-with-an-object)
   3. [Tại sao lại cần key trong v-for](#3-tại-sao-lại-cần-key-trong-v-for)
   4. [v-for with a Component](#4-v-for-with-a-component)
   5. [Array Change Detection](#array-change-detection)
+
+III. [Template Syntax](#template-syntax)
+  1. [Text Interpolation](#text-interpolation)
 ## Có 2 cách chính để tương tác với Vue
 #### 1. Options API (Vue2)
 Xác định logic của các thành phần trong component bằng cách sử dụng data, methods, mounted...
@@ -178,3 +182,9 @@ const evenNumbers = computed(() => {
 
 <li v-for="n in evenNumbers">{{ n }}</li>
 ```
+
+
+
+
+## Template Syntax 
+### Text Interpolation
