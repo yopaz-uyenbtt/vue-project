@@ -188,3 +188,64 @@ const evenNumbers = computed(() => {
 
 ## Template Syntax 
 ### Text Interpolation
+Vue sử dụng cú pháp template dựa trên HTML. Vue biên  dịch template thành mã JavaScript và đảm bảo chỉ có số lượng tối thiểu cần thiết của component được tái render 
+##### 1. Text Interpolation
+Hình thức binding dât cơ bản nhất à nội suy văn bản bằng cú pháp "Mustache" (dấu ngoặc nhọn kép):
+```php
+<span>Message: {{ msg }}</span>
+```
+Mustache tag sẽ có thể cập nhật bất cứ khi nào thuộc tính msg thay đổi
+
+##### 2. Raw HTML 
+Mustache tag dịch data như là pain text chứ không phải HTML, 
+Để có output là HTML thực sự, bạn cần sử dụng v-html 
+Ví dụ: Giả sử 'rawHTML' có giá trị là  
+```php
+<span style="color: red">This should be red.</span>
+```
+
+khi ta sử dụng
+```php
+<p>Using text interpolation: {{ rawHtml }}</p>
+<p>Using v-html directive: <span v-html="rawHtml"></span></p>
+```
+Ta được kết quả
+```php
+Using text interpolation: <span style="color: red">This should be red.</span>
+```
+Và
+Using text interpolation: <span style="color: red">This should be red.</span>
+
+**v-html** có thể tạo rủi ro về bảo mật, không sử dụng để tạo các phần mềm của template. Việc tổ chức giao diện nên được thực hiện thông qua các component
+
+##### 3. Attribute Bindings
+Mustaches không thể chứa các thuộc tính HTML. Thay vào đó ta sử dụng v-bind
+```javscript
+<div v-bind:id="dynamicId"></div>
+```
+shorthand:
+```javascript
+<div :id="dynamicId"></div>
+```
+###### Boolean Attributes
+```javascript
+<button :disabled="isButtonDisabled">Button</button>
+```
+
+thuộc tính disabled xuất hiện trên thẻ button là một thuộc tính boolean
+Nếu isButtonDisabled có một giá trị "truthy"thuộc tính **disable** sẽ được thêm vào thẻ button 
+
+###### Dynamically Binding Multiple Attributes
+
+Bạn có 1 object Javscript nhiều thuộc tính như sau:
+```javascript
+const objectOfAttrs = {
+  id: 'container',
+  class: 'wrapper'
+}
+```
+Bạn có thể liên kết chúng với 1 single elament bằng cách sử dụng v-bind
+```javascript
+<div v-bind="objectOfAttrs"></div>
+```
+
