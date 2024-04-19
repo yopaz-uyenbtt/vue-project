@@ -249,3 +249,89 @@ Bạn có thể liên kết chúng với 1 single elament bằng cách sử dụ
 <div v-bind="objectOfAttrs"></div>
 ```
 
+## Event Handling
+Cách sử dụng sẽ là **v-on:click="handler"** hoặc viết tắt là  **@click="handler"**
+
+**1. Inline handlers**
+là đoạn mã JavaScript được viết trực tiếp trong thuộc tính này, tương tự như thuộc tính onclick trong HTML thuần. Ví dụ ***@click="console.log('Clicked!')"*** để hiển thị thông báo clicked!
+
+```javaScript
+const count = ref(0)
+
+<button @click="count++">Add 1</button>
+<p>Count is: {{ count }}</p>
+```
+**2.Method handlers**
+là tên một phương thức đã được định nghĩa trong component
+***@click="doSomething"***
+
+```javaScript
+const name = ref('Vue.js')
+
+function greet(event) {
+  alert(`Hello ${name.value}!`)
+  // `event` is the native DOM event
+  if (event) {
+    alert(event.target.tagName)
+  }
+}
+
+<!-- `greet` is the name of the method defined above -->
+<button @click="greet">Greet</button>
+```
+
+Method handler tự động nhận đối tượng DOM và kích hoạt nó. Trong ví dụ trên chúng ta có thể truy cập vào phần tử gửi suej kiện thông qua **event.target.tagName**
+ ta được kết quả
+
+```php
+Hello Vue.js!
+
+BUTTON
+```
+
+**3.Method vs. Inline Detection**
+Trong Vue khi sử dụng chỉ thị v-on để lắng nghe các sự kiện, trình biên dịch template (template comnpiler) sẽ phân biệt gữa hai loại handler 
+
+**4. Event Modifiers**
+Vue cung cấp các event modifier cho v-on là các hậu tố được biểu thị bằng dấu chấm
+ ```php
+ '.stop': ngăn chặn sự lan truyền đi lên các phần tử cha
+ <a @click.stop="doThis"></a>
+
+ '.prevent': Ngăn chặn hành vi mặc định của sự kiện.
+ <form @submit.prevent="onSubmit"></form>
+  Khi biểu mẫu này được gửi, nó sẽ không làm tải lại trang như hành vi mặc định của biểu mẫu.
+
+  <div @click.self="doThat">...</div>
+  Sự kiện click chỉ được xử lý nếu người dùng thực sự nhấp vào phần tử div này, không phải vào một phần tử con bên trong nó.
+
+
+<div @click.capture="doThis">...</div>
+Sự kiện click sẽ được xử lý bởi div này trước khi được xử lý bởi bất kỳ phần tử con nào bên trong nó.
+
+<a @click.once="doThis"></a>
+Sự kiện click sẽ chỉ được xử lý một lần, dù bạn có nhấp vào liên kết này bao nhiêu lần đi nữa.
+
+`.passive`: không cho phép event.preventDefault()
+<div @scroll.passive="onScroll">...</div>: Sự kiện cuộn sẽ xảy ra ngay lập tức, không chờ đợi hàm onScroll hoàn thành, ngay cả khi hàm này có chứa event.preventDefault().
+ ```
+
+ **5.Key Modifiers**
+Vue cho phép lắng nghe các sự kiện từ bàn phím bằng v-on
+```php
+<!--Chỉ gọi đến hàm submit khi nhấn `Enter` -->
+<input @keyup.enter="submit" />
+```
+
+Vue cung cấp aliases cho các phím sau:
+```php
+.enter
+.tab
+.delete (captures both "Delete" and "Backspace" keys)
+.esc
+.space
+.up
+.down
+.left
+.right
+```
