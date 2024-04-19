@@ -9,6 +9,15 @@ II. [v-for](#list-rendering)
 
 III. [Template Syntax](#template-syntax)
   1. [Text Interpolation](#text-interpolation)
+  2. [Raw HTML](#2-raw-html)
+  3. [Attribute Bindings](#3-attribute-bindings)
+
+IV. [Event Handing](#event-handling)
+
+V. [Conditional Rendering](#conditional-rendering)
+  
+
+
 ## Có 2 cách chính để tương tác với Vue
 #### 1. Options API (Vue2)
 Xác định logic của các thành phần trong component bằng cách sử dụng data, methods, mounted...
@@ -335,3 +344,51 @@ Vue cung cấp aliases cho các phím sau:
 .left
 .right
 ```
+
+## Conditional Rendering
+### 1. v-if
+Lệnh v-if được sử dụng để hiển thị một khối có điều kiện. Khối sẽ chỉ được hiển thị nếu giá trị của lệnh là true
+```php
+<h1 v-if="awesome">Vue is awesome!</h1>
+```
+
+### 2. v-else
+v-else để chỉ ra khối khác của v-if.
+
+v-else/ v-else-if phải ở ngay sau v-else nếu không sẽ không được nhận dạng
+
+### 3. v-else-if
+Đóng vai trò như 1 v-if và có thể được lặp lại nhiều lần
+```php
+  <div v-if="type === 'A'">
+    A
+  </div>
+  <div v-else-if="type === 'B'">
+    B
+  </div>
+  <div v-else-if="type === 'C'">
+    C
+  </div>
+  <div v-else>
+    Not A/B/C
+  </div>
+```
+
+### 4. v-show
+Sự khác biệt giữa v-show và v-if là v-show sẽ luôn được hiển thị và duy trì DOM, v-show chỉ chuyển đổi thuộc tính *display* CSS của phần tử đó.
+
+v-show không support template element và cũng không hoạt động với v-else
+```php
+<template v-if="ok">
+  <h1>Title</h1>
+  <p>Paragraph 1</p>
+  <p>Paragraph 2</p>
+</template>
+```
+*Template element chỉ hoạt động với v-if*
+
+### 5. v-if with v-show
+- Sử dụng v-if: khi bạn muốn đảm bảo rằng các tài nguyên không cần thiết sẽ không được tải hoặc sửu lý cho đến khi thực sự cần chúng. Điều này hữu ích trong việc tiết kiệm hiệu suất khi xử lý các phần tử hoặc component lớn mà điều kiện hiển thị của chúng ít thay đổi.
+- Sử dụng v-show: Khi bạn cần một phần tử thay đổi trạng thái hiển thị thường xuyên.
+
+- Khi cả v-if và v-for đều được sử dụng trên cùng một phần tử, v-if sẽ được đánh giá trước. 
