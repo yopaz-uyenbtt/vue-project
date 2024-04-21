@@ -41,7 +41,9 @@ const doEdit = (e)=> {
       <label>
         <input type="checkbox" v-model="newItemPriority">
       </label>
-      <button class="btn btn-primary">
+      <button
+       v-bind:disabled="newItem.length === 0"
+       class="btn btn-primary">
         Save
       </button>
     </form>

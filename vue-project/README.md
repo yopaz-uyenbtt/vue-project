@@ -15,6 +15,10 @@ III. [Template Syntax](#template-syntax)
 IV. [Event Handing](#event-handling)
 
 V. [Conditional Rendering](#conditional-rendering)
+
+VI. [Built-in Directives](#built-in-directives)
+  1. [v-bind](#v-bind)
+  2. [v-model](#v-model)
   
 
 
@@ -392,3 +396,45 @@ v-show không support template element và cũng không hoạt động với v-e
 - Sử dụng v-show: Khi bạn cần một phần tử thay đổi trạng thái hiển thị thường xuyên.
 
 - Khi cả v-if và v-for đều được sử dụng trên cùng một phần tử, v-if sẽ được đánh giá trước. 
+
+## Built-in Directives
+### v-bind
+v-bind dùng để rằng buộc động một hoặc nhiều thuộc tính, hoặc một prop của 1 component với một biểu thức. 
+Cụ thể v-bind cho phép tạo liên kết giữa dử liệu trong Vue và thuộc tính HTML
+
+#### 1. Viết tắt: 
+- : hoặc . (khi sử dụng modifier .prop)
+Ví dụ để rằng buộc thuộc tính href của thẻ a đến biến url bạn có thể viết:
+```php
+<a :href="url">Link</a>
+```
+- Từ phiên bản 3.4 nếu tên thuộc tính và giá trị rằng buộc giống nhau, ta có thể lược bỏ giá trị
+Ví dụ:
+```php
+<button :disabled>Disabled Button</button>
+```
+*Ở đây, disabled sẽ được thiết lập nếu giá trị của disabled trong dữ liệu là true.*
+
+#### 2. Đầu vào mong đợi:
+any ( khi có tham số)
+object (khi không có tham số - cho phép bạn rằng buộc nhiều thuộc tính cùng một lúc)
+
+#### 3. Cách sử dụng
+##### Rằng buộc thuộc tính class và style
+- Khi rằng buộc class, v-bind cho phép sử dụng một mảng hoặc đối tượng để xác định class được kích hoạt dựa trên điều kiện hặc tính toán logic
+- Tương tự khi rằng buộc style, bạn có thể sử dụng một đổi tượng để xác địng nhiều thuộc tính style một cách động
+
+##### Rằng buộc prop trong component 
+- Khi dùng v-bind để ràng buộc prop đến một component con, prop đó phải được khai báo một cách rõ ràng trong component con đó. Điều này đảm bảo rằng các dữ liệu được truyền đến component con là hợp lệ và được quản lý một cách thích hợp.
+
+### v-model
+- Tạo liên kết 2 chiều giữ dữ liệu trong Vue và trên giao diện người dùng
+##### Đối tượng mà v-model hỗ trợ:
+- input
+- select
+- textarea
+- component
+##### Các modifier của v-model:
+- .lazy: Mặc định v-model sẽ cập nhật dữ liệu ngay tức với mỗi sự kiện input. tuy nhiên khi sử dụng .lazy v-model sẽ chỉ cập nhật dữ liệu khi có sự kiện change xảy ra(tức là sau khi input đã hoàn thành việc nhập)
+- .number: Chuyển đổi chuỗi đầu vào thành số 
+- .trim: Loại bỏ khoang trắng thưF ở đầu và cuối chuỗi đầu vào 
